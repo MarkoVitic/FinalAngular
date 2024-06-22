@@ -1,0 +1,87 @@
+<div class="my-3">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col px-0">
+      <h1 class="display-4 fst-italic">
+        U nasoj ponudi imamo apartmane na vise Lokacija
+      </h1>
+      <p class="lead my-3">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui pariatur
+        aperiam, cumque doloribus odio rerum magni amet maxime impedit voluptas
+        eaque eum placeat! Possimus consequuntur minus dolore, nisi non
+        officiis? Cum nostrum saepe laboriosam, neque doloribus commodi suscipit
+        error quam eos eius ratione cumque ab fugiat! Adipisci recusandae
+        consectetur minima aut quaerat delectus. Expedita fugiat mollitia enim,
+        neque architecto cumque consequatur aspernatur veniam aliquid quae
+        eligendi in ea accusantium tempora ab modi quas explicabo inventore
+        voluptatem? Velit mollitia est accusantium, a tempora ab omnis corrupti
+        ex necessitatibus facere fugiat iure officia vero id quo odio autem
+        perspiciatis laborum atque provident reprehenderit tenetur! Nesciunt
+        reprehenderit voluptas illum vitae dolores laboriosam at corporis
+        numquam quas mollitia necessitatibus, sequi expedita totam, eveniet
+        perferendis libero possimus quidem vel minus. Dolores, voluptatibus
+        maxime aliquam nesciunt voluptate molestias eius alias ut corrupti
+        molestiae. Assumenda earum recusandae, reiciendis dignissimos possimus
+        velit laudantium itaque deserunt perferendis, ad fugit. Molestiae,
+        obcaecati?
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-2" *ngFor="let objekat of objekti">
+    <div class="row-2">
+      <div
+        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary-emphasis"
+            >Naziv Objekta</strong
+          >
+          <h2 class="mb-3">{{ objekat.nazivApartmana }}</h2>
+
+          <p class="card-text mb-3">
+            {{ objekat.opis }}
+          </p>
+          <div class="mb-1 text-body-secondary">
+            Grad u kojem se objekat nalazi:
+            <p class="card-text mb-auto fw-bold">{{ objekat.grad }}</p>
+          </div>
+          <div class="mb-1 text-body-secondary">
+            Adresa na kojoj se objekat nalazi:
+            <p class="card-text mb-auto fw-bold">{{ objekat.ulica }}</p>
+          </div>
+          <div class="mb-1 text-body-secondary">
+            Email adresa:
+            <p class="card-text mb-auto fw-bold">{{ objekat.email }}</p>
+          </div>
+          <div class="mb-1 text-body-secondary">
+            Kontakt telefon:
+            <p class="card-text mb-auto fw-bold">{{ objekat.telefon }}</p>
+          </div>
+          <a
+            routerLink="/objekti/{{ objekat.id }}/apartman"
+            class="icon-link gap-1 icon-link-hover stretched-link"
+          >
+            Pogledaj apartmane u objekti {{ objekat.nazivApartmana }}
+            <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+          </a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            class="bd-placeholder-img"
+            width="400"
+            height="100%"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Thumbnail"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+          >
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c"></rect>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
