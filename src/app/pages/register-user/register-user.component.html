@@ -1,0 +1,133 @@
+<h2 class="mt-5 mb-3 fw-bold">Registruj se:</h2>
+<form class="container" [formGroup]="registerUserForm">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Ime:</label>
+      <input class="form-control" type="text" formControlName="ime" />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('ime').invalid &&
+          registerUserForm.get('ime').touched
+        "
+      >
+        Molimo Vas unesite Vase <strong>Ime</strong>
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Prezime:</label>
+      <input class="form-control" type="text" formControlName="prezime" />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('prezime').invalid &&
+          registerUserForm.get('prezime').touched
+        "
+      >
+        Molimo Vas unesite Vase <strong>Prezime</strong>
+      </small>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Država:</label>
+      <input class="form-control" type="text" formControlName="drzava" />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('drzava').invalid &&
+          registerUserForm.get('drzava').touched
+        "
+      >
+        Molimo Vas unesite naziv <strong>Drzave</strong> iz koje dolazite
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Grad:</label>
+      <input class="form-control" type="text" formControlName="grad" />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('grad').invalid &&
+          registerUserForm.get('grad').touched
+        "
+      >
+        Molimo Vas unesite naziv <strong>Grad</strong> iz koje dolazite
+      </small>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Telefon:</label>
+      <input class="form-control" type="text" formControlName="telefon" />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('telefon').invalid &&
+          registerUserForm.get('telefon').touched
+        "
+      >
+        Molimo Vas unesite broj <strong>Telefona</strong> sa pozvni brojem za
+        Vasu drzavu
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Email:</label>
+      <input class="form-control" type="email" formControlName="email" />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('email').invalid &&
+          registerUserForm.get('email').touched
+        "
+      >
+        Molimo Vas unesite Vas <strong>Email</strong>
+      </small>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Sifra:</label>
+      <input class="form-control" type="password" formControlName="password" />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('password').invalid &&
+          registerUserForm.get('password').touched
+        "
+      >
+        Molimo Vas unesite Vasu <strong>Sifru</strong>
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Potvrdi Sifru:</label>
+      <input
+        class="form-control"
+        type="password"
+        formControlName="comformpassword"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          registerUserForm.get('comformpassword').invalid &&
+          registerUserForm.get('comformpassword').touched
+        "
+      >
+        Molimo Vas unesite Vasu <strong>Sifru</strong>
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <button
+      class="btn btn-primary"
+      [disabled]="registerUserForm.invalid"
+      type="submit"
+      (click)="register()"
+    >
+      Registruj se
+    </button>
+  </div>
+</form>

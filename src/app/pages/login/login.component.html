@@ -1,0 +1,42 @@
+<h2 class="mt-5 mb-3 fw-bold">Uloguj se:</h2>
+<form class="container" [formGroup]="loginUserForm">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Email:</label>
+      <input class="form-control" type="email" formControlName="email" />
+      <small
+        class="text-danger"
+        *ngIf="
+          loginUserForm.get('email').invalid &&
+          loginUserForm.get('email').touched
+        "
+      >
+        Molimo Vas unesite Vas <strong>Email</strong>
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Sifra:</label>
+      <input class="form-control" type="password" formControlName="password" />
+      <small
+        class="text-danger"
+        *ngIf="
+          loginUserForm.get('password').invalid &&
+          loginUserForm.get('password').touched
+        "
+      >
+        Molimo Vas unesite Vasu <strong>Sifru</strong>
+      </small>
+    </div>
+
+    <div class="mt-3">
+      <button
+        class="btn btn-primary"
+        [disabled]="loginUserForm.invalid"
+        type="submit"
+        (click)="login()"
+      >
+        Registruj se
+      </button>
+    </div>
+  </div>
+</form>

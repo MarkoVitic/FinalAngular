@@ -4,6 +4,8 @@ import { HomeComponent } from '../home/home.component';
 import { ApartmentsComponent } from '../apartments/apartments.component';
 import { ApartmentDetailComponent } from '../apartment-detail/apartment-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from '../login/login.component';
+import { RegisterUserComponent } from '../register-user/register-user.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/objekti', pathMatch: 'full' },
@@ -16,6 +18,8 @@ const routes: Routes = [
     path: 'objekti/:id/:apartmanId',
     component: ApartmentDetailComponent,
   },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterUserComponent },
 ];
 
 @NgModule({
