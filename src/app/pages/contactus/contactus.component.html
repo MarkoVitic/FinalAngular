@@ -1,0 +1,79 @@
+<div class="container d-flex flex-row mt-5 mb-5 gap-3 mr-3">
+  <div class="p-3">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1567.8759487351147!2d19.086100393018757!3d42.11270775691603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134e772448c2563d%3A0xb5caad6a203fc38e!2sApartment%20Viti%C4%87!5e0!3m2!1ssr!2s!4v1719245013837!5m2!1ssr!2s"
+      width="600"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+  <div
+    class="d-flex flex-column justify-content-center align-items-center w-100 my-3"
+  >
+    <form [formGroup]="kontaktForma" class="w-100">
+      <div class="mb-3">
+        <label class="form-label">Vase Ime</label>
+        <input class="form-control" type="text" formControlName="ime" />
+        <small
+          class="text-danger"
+          *ngIf="
+            kontaktForma.get('ime').invalid && kontaktForma.get('ime').touched
+          "
+        >
+          Molimo Vas unesite Vase <strong>Ime</strong>
+        </small>
+      </div>
+      <div>
+        <label class="form-label">Vas email</label>
+        <input class="form-control" type="email" formControlName="email" />
+        <small
+          class="text-danger"
+          *ngIf="
+            kontaktForma.get('email').invalid &&
+            kontaktForma.get('email').touched
+          "
+        >
+          Molimo Vas unesite Vas <strong>Email</strong>
+        </small>
+      </div>
+      <div>
+        <label class="form-label">Vas broj telefona</label>
+        <input class="form-control" type="text" formControlName="telefon" />
+        <small
+          class="text-danger"
+          *ngIf="
+            kontaktForma.get('telefon').invalid &&
+            kontaktForma.get('telefon').touched
+          "
+        >
+          Molimo Vas unesite Vas <strong>Broj Telefona</strong>
+        </small>
+      </div>
+      <div class="mb-5">
+        <label class="form-label">Vasa Poruka</label>
+        <textarea
+          maxlength="300"
+          class="form-control"
+          formControlName="poruka"
+        ></textarea>
+        <small
+          class="text-danger"
+          *ngIf="
+            kontaktForma.get('poruka').invalid &&
+            kontaktForma.get('poruka').touched
+          "
+        >
+          Molimo Vas unesite Vase <strong>Pitanje</strong>
+        </small>
+      </div>
+      <div class="d-flex align-self-end align-items-end">
+        <button type="submit" class="btn btn-primary" (click)="sendMsg()">
+          Posalji Poruku
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

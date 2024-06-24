@@ -6,9 +6,10 @@ import { ApartmentDetailComponent } from '../apartment-detail/apartment-detail.c
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from '../login/login.component';
 import { RegisterUserComponent } from '../register-user/register-user.component';
+import { ContactusComponent } from '../contactus/contactus.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/objekti', pathMatch: 'full' },
+  { path: '', redirectTo: '/objekti', pathMatch: 'full' },
   { path: 'objekti', component: HomeComponent },
   {
     path: 'objekti/:id/apartman',
@@ -20,6 +21,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterUserComponent },
+  { path: 'contactus', component: ContactusComponent },
 ];
 
 @NgModule({

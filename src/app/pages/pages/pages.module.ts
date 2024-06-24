@@ -1,3 +1,4 @@
+import { ContactusComponent } from './../contactus/contactus.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ApartmentDetailComponent,
     LoginComponent,
     RegisterUserComponent,
+    ContactusComponent,
   ],
   imports: [CommonModule, PagesRoutingModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -24,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ApartmentDetailComponent,
     LoginComponent,
     RegisterUserComponent,
+    ContactusComponent,
   ],
 })
 export class PagesModule {}
