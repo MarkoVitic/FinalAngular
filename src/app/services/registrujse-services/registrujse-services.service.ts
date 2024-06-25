@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Korisnik } from '../../models/korisnik';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,6 @@ export class RegistrujseServicesService {
     return this.http.post<Korisnik>(this.apiUrl + '/korisnici', korisnik);
   }
   login(korisnik: any) {
-    return this.http.post<Korisnik>(this.apiUrl + '/login', korisnik);
+    return this.http.post<any>(this.apiUrl + '/login', korisnik);
   }
 }

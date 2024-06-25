@@ -29,8 +29,11 @@ export class LoginComponent implements OnInit {
       email: this.loginUserForm.get('email').value,
       password: this.loginUserForm.get('password').value,
     };
-    this.registracijaService
-      .login(this.korisnik)
-      .subscribe((data) => console.log(data + 'ulogovao se'));
+    console.log(this.korisnik);
+    this.registracijaService.login(this.korisnik).subscribe((data: any) => {
+      if (data.token) {
+        localStorage.setItem('data-token', data.token);
+      }
+    });
   }
 }

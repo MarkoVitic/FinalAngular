@@ -46,7 +46,13 @@ export class RegisterUserComponent implements OnInit {
         password: this.registerUserForm.get('password').value,
       };
 
-      this.registracijaService.createUser(this.korisnik).subscribe();
+      this.registracijaService
+        .createUser(this.korisnik)
+        .subscribe((data: any) => {
+          if (data.token) {
+            localStorage.setItem('data-token', data.token);
+          }
+        });
       alert('Uspjesno ste kreirali nalog');
     } else {
       alert('Provjerite da li ste Password unijeli Dobro');
