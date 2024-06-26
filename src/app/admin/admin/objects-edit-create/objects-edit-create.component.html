@@ -1,0 +1,122 @@
+<h2 class="mt-5 mb-3 fw-bold">Dodaj novi Objekat:</h2>
+<form class="container" [formGroup]="createObjectForm">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Naziv Apartmana:</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="nazivApartmana"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          createObjectForm.get('nazivApartmana').invalid &&
+          createObjectForm.get('nazivApartmana').touched
+        "
+      >
+        Molimo Vas unesite <strong>naziv Apartmana</strong>
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Drzava:</label>
+      <input class="form-control" type="text" formControlName="drzava" />
+      <small
+        class="text-danger"
+        *ngIf="
+          createObjectForm.get('drzava').invalid &&
+          createObjectForm.get('drzava').touched
+        "
+      >
+        Molimo Vas unesite <strong>Drzavu</strong>
+      </small>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Adresa:</label>
+      <input class="form-control" type="text" formControlName="ulica" />
+      <small
+        class="text-danger"
+        *ngIf="
+          createObjectForm.get('ulica').invalid &&
+          createObjectForm.get('ulica').touched
+        "
+      >
+        Molimo Vas unesite <strong>Adresu</strong> Objekta
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Grad:</label>
+      <input class="form-control" type="text" formControlName="grad" />
+      <small
+        class="text-danger"
+        *ngIf="
+          createObjectForm.get('grad').invalid &&
+          createObjectForm.get('grad').touched
+        "
+      >
+        Molimo Vas unesite naziv <strong>Grad</strong> iz koje dolazite
+      </small>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Telefon:</label>
+      <input class="form-control" type="text" formControlName="telefon" />
+      <small
+        class="text-danger"
+        *ngIf="
+          createObjectForm.get('telefon').invalid &&
+          createObjectForm.get('telefon').touched
+        "
+      >
+        Molimo Vas unesite broj <strong>Telefona</strong> sa pozvni brojem za
+        Vasu drzavu
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Email:</label>
+      <input class="form-control" type="email" formControlName="email" />
+      <small
+        class="text-danger"
+        *ngIf="
+          createObjectForm.get('email').invalid &&
+          createObjectForm.get('email').touched
+        "
+      >
+        Molimo Vas unesite Vas <strong>Email</strong>
+      </small>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="form-label">Opis</label>
+    <textarea
+      maxlength="300"
+      class="form-control"
+      formControlName="opis"
+    ></textarea>
+    <small
+      class="text-danger"
+      *ngIf="
+        createObjectForm.get('opis').invalid &&
+        createObjectForm.get('opis').touched
+      "
+    >
+      Molimo Vas unesite Vase <strong>Pitanje</strong>
+    </small>
+  </div>
+
+  <div class="mb-3">
+    <button
+      class="btn btn-primary"
+      [disabled]="createObjectForm.invalid"
+      type="submit"
+      (click)="createObject()"
+    >
+      Registruj se
+    </button>
+  </div>
+</form>

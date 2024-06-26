@@ -11,16 +11,17 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AdminModule } from './admin/admin/admin.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, ],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PagesModule,
     RouterModule,
     HttpClientModule,
+    AdminModule,
   ],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],

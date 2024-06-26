@@ -17,4 +17,13 @@ export class ObjektiServicesService {
   getSingleObjekat(id: number) {
     return this.http.get<Objekti>(this.apiUrl + `/${id}`);
   }
+  deleteObject(idObjekat: number) {
+    return this.http.delete(this.apiUrl + `/${idObjekat}`);
+  }
+  createObject(object: Objekti) {
+    return this.http.post<Objekti>(this.apiUrl, object);
+  }
+  updateObject(idObject: number, object: any) {
+    return this.http.put<Objekti>(this.apiUrl + `/${idObject}`, object);
+  }
 }
