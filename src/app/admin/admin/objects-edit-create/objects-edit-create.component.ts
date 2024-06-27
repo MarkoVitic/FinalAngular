@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ObjektiServicesService } from '../../../services/objekti-services/objekti-services.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Objekti } from '../../../models/objekti';
 
 @Component({
@@ -16,7 +16,8 @@ export class ObjectsEditCreateComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private objService: ObjektiServicesService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private route: Router
   ) {}
   ngOnInit(): void {
     this.createObjectForm = this.form.group({
@@ -43,13 +44,17 @@ export class ObjectsEditCreateComponent implements OnInit {
       if (!this.id) {
         console.log(this.id, 'ako nije update');
         this.objService.createObject(this.createObjectForm.value).subscribe();
-        // this.createObjectForm.reset();
+        this.createObjectForm.reset();
+
+        this.route.navigate(['/admin-object']);
       } else {
         console.log(this.id, this.createObjectForm.value, 'ako jeste update');
         this.objService
           .updateObject(this.id, this.createObjectForm.value)
           .subscribe();
-        // this.createObjectForm.reset();
+
+        this.createObjectForm.reset();
+        this.route.navigate(['/admin-object']);
       }
     }
   }

@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'admin-object', component: AdminObjectsComponent },
   { path: 'admin-object/create', component: ObjectsEditCreateComponent },
   { path: 'admin-object/create/:id', component: ObjectsEditCreateComponent },
-  { path: 'admin-apartment', component: AdminApartmentComponent },
+  { path: ':objectId/admin-apartment', component: AdminApartmentComponent },
 ];
 
 @NgModule({
