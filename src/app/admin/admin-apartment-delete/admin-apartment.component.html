@@ -1,9 +1,6 @@
 <div *ngFor="let apartman of apartmani"></div>
 
 <div class="container">
-  <button class="btn btn-primary" routerLink="/admin-object/create">
-    Dodaj Objekat
-  </button>
   <div class="row">
     <div class="row-md-2">
       <div class="card mb-4 shadow-sm">
@@ -17,13 +14,27 @@
 
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <button type="button" class="btn btn-danger mx-2">Delete</button>
+              <button
+                type="button"
+                class="btn btn-danger mx-2"
+                (click)="deleteApartment(apartman.naziv_apartmana)"
+              >
+                Delete
+              </button>
               <button
                 type="button"
                 class="btn btn-secondary"
-                routerLink="/admin-object/create/"
+                routerLink="/{{
+                  apartman.apartman_id
+                }}/admin-apartment/create/{{ apartman.naziv_apartmana }}"
               >
                 Izmijeni
+              </button>
+              <button
+                class="btn btn-primary"
+                routerLink="/{{ apartman.apartman_id }}/admin-apartment/create"
+              >
+                Dodaj Apartman
               </button>
             </div>
           </div>

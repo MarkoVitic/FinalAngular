@@ -14,4 +14,25 @@ export class ApartmaniServicesService {
   getAllApartments(id: number) {
     return this.http.get<Apartman[]>(this.apiUrl + `/${id}` + '/apartman');
   }
+  getApartment(idHotel: number, idApartman: string) {
+    return this.http.get<Apartman>(
+      this.apiUrl + `/${idHotel}` + `/${idApartman}`
+    );
+  }
+
+  deleteApartment(idObjekat: number, idApartman: string) {
+    return this.http.get(this.apiUrl + `/${idObjekat}` + `/${idApartman}`);
+  }
+  createApartment(idHotel: number, apartman: Apartman) {
+    return this.http.post<Apartman>(
+      this.apiUrl + `/${idHotel}` + '/apartman',
+      apartman
+    );
+  }
+  updateApartment(idHotel: number, idApartman: string, apartman: Apartman) {
+    return this.http.put<Apartman>(
+      this.apiUrl + `/${idHotel}` + `/${idApartman}`,
+      apartman
+    );
+  }
 }

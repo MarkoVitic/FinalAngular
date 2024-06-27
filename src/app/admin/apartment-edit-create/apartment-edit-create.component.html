@@ -1,0 +1,104 @@
+<h2 class="mt-5 mb-3 fw-bold">Dodaj novi Apartman:</h2>
+<form class="container" [formGroup]="apartmentForm">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Naziv Apartmana:</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="naziv_apartmana"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          apartmentForm.get('naziv_apartmana').invalid &&
+          apartmentForm.get('naziv_apartmana').touched
+        "
+      >
+        Molimo Vas unesite <strong>naziv Apartmana</strong>
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Sprat:</label>
+      <input
+        class="form-control"
+        type="number"
+        formControlName="sprat_apartmana"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          apartmentForm.get('sprat_apartmana').invalid &&
+          apartmentForm.get('sprat_apartmana').touched
+        "
+      >
+        Molimo Vas unesite <strong>Sprat</strong> Apartmana
+      </small>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Cijena:</label>
+      <input
+        class="form-control"
+        type="number"
+        formControlName="cijena_po_danu"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          apartmentForm.get('cijena_po_danu').invalid &&
+          apartmentForm.get('cijena_po_danu').touched
+        "
+      >
+        Molimo Vas unesite <strong>Cijenu</strong> Apartmana
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Maksimalni broj osoba:</label>
+      <input
+        class="form-control"
+        type="number"
+        formControlName="max_broj_osoba"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          apartmentForm.get('max_broj_osoba').invalid &&
+          apartmentForm.get('max_broj_osoba').touched
+        "
+      >
+        Molimo Vas unesite naziv <strong>Maksimalni broj osoba</strong>
+      </small>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="form-label">Opis</label>
+    <textarea
+      maxlength="500"
+      class="form-control"
+      formControlName="opis_apartmanA"
+    ></textarea>
+    <small
+      class="text-danger"
+      *ngIf="
+        apartmentForm.get('opis_apartmanA').invalid &&
+        apartmentForm.get('opis_apartmanA').touched
+      "
+    >
+      Molimo Vas unesite <strong>Opis</strong>
+    </small>
+  </div>
+
+  <div class="mb-3">
+    <button
+      class="btn btn-primary"
+      [disabled]="apartmentForm.invalid"
+      type="submit"
+      (click)="createApartment()"
+    >
+      Dodaj Apartman
+    </button>
+  </div>
+</form>
