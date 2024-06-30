@@ -20,4 +20,27 @@ export class RegistrujseServicesService {
   login(korisnik: any) {
     return this.http.post<any>(this.apiUrl + '/login', korisnik);
   }
+
+  isLogedIn(): boolean {
+    const token = localStorage.getItem('data-token');
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  logOut() {
+    const token = localStorage.clear();
+    return false;
+  }
+  getUserData() {
+    const token = localStorage.getItem('data-token');
+    if (!token) return null;
+
+    const tokenParts = token.split('.');
+    const userData = tokenParts[1];
+    const user = JSON.parse(window.atob(userData));
+
+    return user;
+  }
 }

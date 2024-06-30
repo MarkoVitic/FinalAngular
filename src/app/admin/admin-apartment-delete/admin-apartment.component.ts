@@ -1,7 +1,7 @@
 import { Apartman } from '../../models/apartman';
 import { ApartmaniServicesService } from '../../services/apartmani-services/apartmani-services.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-apartment',
@@ -14,19 +14,23 @@ export class AdminApartmentComponent implements OnInit {
   apartmanId: number;
   constructor(
     private apartmentService: ApartmaniServicesService,
-    private route: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) {}
   ngOnInit(): void {
-    this.objectId = parseInt(this.route.snapshot.paramMap.get('objectId'));
-
-    this.apartmentService
-      .getAllApartments(this.objectId)
-      .subscribe((data) => (this.apartmani = data));
+    this.objectId = parseInt(
+      this.activeRoute.snapshot.paramMap.get('objectId')
+    );
+    if (this.objectId) {
+      this.apartmentService
+        .getAllApartments(this.objectId)
+        .subscribe((data) => (this.apartmani = data));
+    }
   }
 
   deleteApartment(idObjekat: string) {
-    return this.apartmentService
-      .deleteApartment(this.objectId, idObjekat)
-      .subscribe();
+    console.log(this.objectId);
+    this.apartmentService.deleteApartment(this.objectId, idObjekat).subscribe();
+    this.router.navigate([`${this.objectId}/admin-apartment`]);
   }
 }

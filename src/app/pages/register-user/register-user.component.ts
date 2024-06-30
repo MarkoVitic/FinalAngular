@@ -3,6 +3,7 @@ import { Korisnik } from './../../models/korisnik';
 import { RegistrujseServicesService } from './../../services/registrujse-services/registrujse-services.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user',
@@ -15,7 +16,8 @@ export class RegisterUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registracijaService: RegistrujseServicesService
+    private registracijaService: RegistrujseServicesService,
+    private route: Router
   ) {}
   ngOnInit(): void {
     this.registerUserForm = this.formBuilder.group({
@@ -54,6 +56,7 @@ export class RegisterUserComponent implements OnInit {
           }
         });
       alert('Uspjesno ste kreirali nalog');
+      this.route.navigate(['/']);
     } else {
       alert('Provjerite da li ste Password unijeli Dobro');
       console.log('invalide');

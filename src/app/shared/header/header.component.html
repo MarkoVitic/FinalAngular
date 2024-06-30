@@ -34,13 +34,28 @@
 
   <div class="col-md-3 text-end">
     <button
+      *ngIf="!loggedIn"
       routerLink="/login"
       type="button"
       class="btn btn-outline-primary me-2"
     >
       Uloguj se
     </button>
-    <button routerLink="/register" type="button" class="btn btn-primary">
+    <button
+      *ngIf="loggedIn"
+      routerLink="/login"
+      type="button"
+      class="btn btn btn-warning me-2"
+      (click)="logout()"
+    >
+      Odjavi se
+    </button>
+    <button
+      *ngIf="!loggedIn"
+      routerLink="/register"
+      type="button"
+      class="btn btn-primary"
+    >
       Registruj se
     </button>
   </div>

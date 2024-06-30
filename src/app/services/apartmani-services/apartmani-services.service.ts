@@ -21,7 +21,8 @@ export class ApartmaniServicesService {
   }
 
   deleteApartment(idObjekat: number, idApartman: string) {
-    return this.http.get(this.apiUrl + `/${idObjekat}` + `/${idApartman}`);
+    console.log(idObjekat);
+    return this.http.delete(this.apiUrl + `/${idObjekat}` + `/${idApartman}`);
   }
   createApartment(idHotel: number, apartman: Apartman) {
     return this.http.post<Apartman>(

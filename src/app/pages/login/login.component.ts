@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Korisnik } from '../../models/korisnik';
 import { RegistrujseServicesService } from '../../services/registrujse-services/registrujse-services.service';
+import { Router } from '@angular/router';
 Korisnik;
 
 @Component({
@@ -15,11 +16,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registracijaService: RegistrujseServicesService
+    private registracijaService: RegistrujseServicesService,
+    private route: Router
   ) {}
   ngOnInit(): void {
     this.loginUserForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -29,11 +31,12 @@ export class LoginComponent implements OnInit {
       email: this.loginUserForm.get('email').value,
       password: this.loginUserForm.get('password').value,
     };
-    console.log(this.korisnik);
+
     this.registracijaService.login(this.korisnik).subscribe((data: any) => {
       if (data.token) {
         localStorage.setItem('data-token', data.token);
       }
     });
+    this.route.navigate(['/']);
   }
 }

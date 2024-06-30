@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apartman } from '../../models/apartman';
 import { ApartmaniServicesService } from '../../services/apartmani-services/apartmani-services.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-apartment-edit-create',
@@ -18,7 +18,8 @@ export class ApartmentEditCreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apartmanService: ApartmaniServicesService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.apartmentForm = this.formBuilder.group({
@@ -46,6 +47,7 @@ export class ApartmentEditCreateComponent implements OnInit {
       this.apartmanService
         .createApartment(this.hotelId, this.apartmentForm.value)
         .subscribe();
+      this.router.navigate([`${this.hotelId}/admin-apartment`]);
     }
     console.log(this.apartmanId);
     if (this.apartmanId && this.apartmanId.length > 0) {
@@ -57,6 +59,7 @@ export class ApartmentEditCreateComponent implements OnInit {
           this.apartmentForm.value
         )
         .subscribe();
+      this.router.navigate([`${this.hotelId}/admin-apartment`]);
     }
   }
 }
