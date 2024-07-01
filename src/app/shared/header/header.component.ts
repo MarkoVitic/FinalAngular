@@ -9,6 +9,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   loggedIn: boolean = false;
+
   userEmail: string = '';
 
   constructor(

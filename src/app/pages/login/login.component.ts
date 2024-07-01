@@ -35,8 +35,10 @@ export class LoginComponent implements OnInit {
     this.registracijaService.login(this.korisnik).subscribe((data: any) => {
       if (data.token) {
         localStorage.setItem('data-token', data.token);
+        this.route.navigate(['/']);
+      } else {
+        alert('Pogresan User');
       }
     });
-    this.route.navigate(['/']);
   }
 }

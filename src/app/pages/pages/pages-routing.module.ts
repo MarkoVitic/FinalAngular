@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from '../login/login.component';
 import { RegisterUserComponent } from '../register-user/register-user.component';
 import { ContactusComponent } from '../contactus/contactus.component';
+import { BookNowComponent } from '../book-now/book-now.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/objekti', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterUserComponent },
   { path: 'contactus', component: ContactusComponent },
+  { path: 'bookNow', component: BookNowComponent },
 ];
 
 @NgModule({

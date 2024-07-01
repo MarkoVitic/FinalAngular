@@ -1,0 +1,23 @@
+<div
+  class="container d-flex flex-row justify-content-between align-items-end"
+  *ngFor="let apartman of allApartments"
+>
+  <div class="text-center pb-4" style="width: 200px">
+    {{ apartman.naziv_apartmana }}
+  </div>
+  <div
+    class="d-flex flex-column justify-content-between align-items-center mr-2"
+    *ngFor="let date of datesForBooking; index as i"
+  >
+    <div>
+      <div>
+        {{ date.month }} <strong>{{ date.day }}</strong> <br />
+        {{ date.dayOfWeek }}
+      </div>
+
+      <div class="bg-light pt-4 px-2" style="height: 70px; width: 60px">
+        {{ apartman.cijena_po_danu }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,13 +20,15 @@ export class ApartmentsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     let hotelId: number = 0;
-    let objekatId: number;
+
     this.activatedRoute.params.subscribe((data) => {
       hotelId = data['id'];
     });
-    this.apartmanServices.getAllApartments(hotelId).subscribe((data) => {
-      this.apartmani = data;
-    });
+    if (hotelId) {
+      this.apartmanServices.getAllApartments(hotelId).subscribe((data) => {
+        this.apartmani = data;
+      });
+    }
 
     this.objektiServicesService
       .getSingleObjekat(hotelId)

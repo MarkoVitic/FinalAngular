@@ -9,6 +9,7 @@ import { ApartmentDetailComponent } from '../apartment-detail/apartment-detail.c
 import { LoginComponent } from '../login/login.component';
 import { RegisterUserComponent } from '../register-user/register-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BookNowComponent } from '../book-now/book-now.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterUserComponent,
     ContactusComponent,
+    BookNowComponent,
   ],
   imports: [CommonModule, PagesRoutingModule, FormsModule, ReactiveFormsModule],
   exports: [
