@@ -20,6 +20,8 @@ export class BookNowComponent implements OnInit {
   currentYear: number;
   allObjects: Objekti[];
   allApartments: Apartman[];
+  stepForwarBack: number = 0;
+  dateSelected: boolean = false;
 
   constructor(
     private objectServices: ObjektiServicesService,
@@ -44,9 +46,11 @@ export class BookNowComponent implements OnInit {
   }
 
   show15Days() {
+    let step = this.stepForwarBack;
+
     for (let i = 0; i < 15; i++) {
       const futureDate = new Date();
-      futureDate.setDate(this.dateNow.getDate() + i);
+      futureDate.setDate(this.dateNow.getDate() + (this.stepForwarBack + i));
 
       const day = futureDate.getDate();
       const month = this.getMonthOfYear(futureDate.getMonth());
@@ -54,6 +58,32 @@ export class BookNowComponent implements OnInit {
       const dayOfWeek = this.getDayOfWeek(futureDate.getDay());
 
       this.datesForBooking.push({ day, month, year, dayOfWeek });
+    }
+  }
+
+  test(index: number, nazivApartmana: string) {
+    let apartman = nazivApartmana.split(' ').join('');
+    let startDate = document.querySelectorAll(`.class-${apartman}`);
+
+    for (let i = 0; i <= index; i++) {
+      if (i === index) {
+        startDate[i].classList.add('active');
+      }
+    }
+  }
+  step(step: number) {
+    console.log(step);
+    if (step === 15) {
+      this.stepForwarBack += step;
+      console.log('plus', this.stepForwarBack);
+      this.datesForBooking = [];
+      this.show15Days();
+    } else if (step === -15 && this.stepForwarBack > 0) {
+      console.log(step);
+      this.stepForwarBack = this.stepForwarBack - 15;
+      console.log('minus', this.stepForwarBack);
+      this.datesForBooking = [];
+      this.show15Days();
     }
   }
 

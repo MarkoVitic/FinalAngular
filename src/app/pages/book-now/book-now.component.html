@@ -1,22 +1,37 @@
-<div
-  class="container d-flex flex-row justify-content-between align-items-end"
-  *ngFor="let apartman of allApartments"
->
-  <div class="text-center pb-4" style="width: 200px">
-    {{ apartman.naziv_apartmana }}
+<div class="container d-flex flex-column">
+  <div
+    class="container d-flex flex-row justify-content-between align-items-end"
+  >
+    <button [disabled]="stepForwarBack <= 0" (click)="step(-15)">
+      Predhodno</button
+    ><button (click)="step(15)">Sledece</button>
   </div>
   <div
-    class="d-flex flex-column justify-content-between align-items-center mr-2"
-    *ngFor="let date of datesForBooking; index as i"
+    class="container d-flex flex-row justify-content-between align-items-end"
+    *ngFor="let apartman of allApartments; let i = index"
   >
-    <div>
+    <div class="text-center pb-4" style="width: 200px">
+      {{ apartman.naziv_apartmana }}
+    </div>
+    <div
+      class="d-flex flex-column justify-content-between align-items-center mr-2"
+      *ngFor="let date of datesForBooking; index as i"
+    >
       <div>
-        {{ date.month }} <strong>{{ date.day }}</strong> <br />
-        {{ date.dayOfWeek }}
-      </div>
+        <div>
+          {{ date.month }} <strong>{{ date.day }}</strong> <br />
+          {{ date.dayOfWeek }}
+        </div>
 
-      <div class="bg-light pt-4 px-2" style="height: 70px; width: 60px">
-        {{ apartman.cijena_po_danu }}
+        <div
+          class="pt-4 px-2 class-{{
+            apartman.naziv_apartmana.split(' ').join('')
+          }}"
+          style="height: 60px; width: 60px"
+          (click)="test(i, apartman.naziv_apartmana)"
+        >
+          {{ apartman.cijena_po_danu }}
+        </div>
       </div>
     </div>
   </div>

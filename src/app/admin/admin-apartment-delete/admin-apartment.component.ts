@@ -30,7 +30,13 @@ export class AdminApartmentComponent implements OnInit {
 
   deleteApartment(idObjekat: string) {
     console.log(this.objectId);
-    this.apartmentService.deleteApartment(this.objectId, idObjekat).subscribe();
-    this.router.navigate([`${this.objectId}/admin-apartment`]);
+    this.apartmentService
+      .deleteApartment(this.objectId, idObjekat)
+      .subscribe((data) => {
+        if (data) {
+          this.ngOnInit();
+          // this.router.navigate([`${this.objectId}/admin-apartment`]);
+        }
+      });
   }
 }

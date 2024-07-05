@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       if (data.token) {
         localStorage.setItem('data-token', data.token);
         this.route.navigate(['/']);
+        console.log(localStorage.getItem('data-token'));
       } else {
         alert('Pogresan User');
       }
