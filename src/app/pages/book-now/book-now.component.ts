@@ -21,7 +21,7 @@ export class BookNowComponent implements OnInit {
   allObjects: Objekti[];
   allApartments: Apartman[];
   stepForwarBack: number = 0;
-  dateSelected: boolean = false;
+  dateSelected: number[] = [];
 
   constructor(
     private objectServices: ObjektiServicesService,
@@ -46,8 +46,6 @@ export class BookNowComponent implements OnInit {
   }
 
   show15Days() {
-    let step = this.stepForwarBack;
-
     for (let i = 0; i < 15; i++) {
       const futureDate = new Date();
       futureDate.setDate(this.dateNow.getDate() + (this.stepForwarBack + i));
@@ -58,17 +56,6 @@ export class BookNowComponent implements OnInit {
       const dayOfWeek = this.getDayOfWeek(futureDate.getDay());
 
       this.datesForBooking.push({ day, month, year, dayOfWeek });
-    }
-  }
-
-  test(index: number, nazivApartmana: string) {
-    let apartman = nazivApartmana.split(' ').join('');
-    let startDate = document.querySelectorAll(`.class-${apartman}`);
-
-    for (let i = 0; i <= index; i++) {
-      if (i === index) {
-        startDate[i].classList.add('active');
-      }
     }
   }
   step(step: number) {
@@ -85,6 +72,63 @@ export class BookNowComponent implements OnInit {
       this.datesForBooking = [];
       this.show15Days();
     }
+  }
+
+  selectDate(index: number, nazivApartmana: string) {
+    if (this.dateSelected.length <= 1) {
+      this.dateSelected.push(index);
+      if (this.dateSelected[0] <= index) {
+        if (this.dateSelected) {
+          let apartman = nazivApartmana.split(' ').join('');
+          let startDate = document.querySelectorAll(`.class-${apartman}`);
+          let allSlectedDivs = document.querySelectorAll('div');
+          allSlectedDivs.forEach((div) => {
+            if (
+              !div.classList.contains(`class-${apartman}`) &&
+              div.classList.contains('cijena')
+            ) {
+              div.style.pointerEvents = 'none';
+
+              div.style.backgroundColor = 'lightblue'; // Optional: to visually indicate the div is unclickable
+            }
+          });
+
+          for (
+            let i = 0;
+            i <= this.dateSelected[this.dateSelected.length - 1];
+            i++
+          ) {
+            if (
+              i >= this.dateSelected[this.dateSelected.length - 1] ||
+              (i <= this.dateSelected[this.dateSelected.length - 1] &&
+                i >= this.dateSelected[0])
+            ) {
+              startDate[i].classList.add('active');
+            }
+          }
+        }
+      } else {
+        alert('E Brko! Sto pokusavas to!?');
+        this.resetBookingStyles();
+      }
+    } else {
+      alert('Opet ti Brko! Sto pokusavas to!?');
+      this.resetBookingStyles();
+    }
+  }
+
+  resetBookingStyles() {
+    let allSlectedDivs = document.querySelectorAll('div');
+    allSlectedDivs.forEach((div) => div.classList.remove('active'));
+    allSlectedDivs.forEach((div) => {
+      if (div.classList.contains('cijena')) {
+        div.style.pointerEvents = 'auto';
+
+        div.style.backgroundColor = ''; // Optional: to visually indicate the div is unclickable
+      }
+    });
+
+    this.dateSelected = [];
   }
 
   getDayOfWeek(dayIndex: number): string {

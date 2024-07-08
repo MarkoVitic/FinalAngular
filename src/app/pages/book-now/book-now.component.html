@@ -24,11 +24,11 @@
         </div>
 
         <div
-          class="pt-4 px-2 class-{{
+          class="cijena pt-4 px-2 class-{{
             apartman.naziv_apartmana.split(' ').join('')
           }}"
           style="height: 60px; width: 60px"
-          (click)="test(i, apartman.naziv_apartmana)"
+          (click)="selectDate(i, apartman.naziv_apartmana)"
         >
           {{ apartman.cijena_po_danu }}
         </div>
