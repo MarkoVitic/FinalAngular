@@ -8,6 +8,7 @@ import { LoginComponent } from '../login/login.component';
 import { RegisterUserComponent } from '../register-user/register-user.component';
 import { ContactusComponent } from '../contactus/contactus.component';
 import { BookNowComponent } from '../book-now/book-now.component';
+import { guardGuard } from '../../guards/guard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/objekti', pathMatch: 'full' },

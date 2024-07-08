@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistrujseServicesService } from '../../services/registrujse-services/registrujse-services.service';
 import { Router, RouterLink } from '@angular/router';
+import { log } from 'console';
 
 @Component({
   selector: 'app-header',

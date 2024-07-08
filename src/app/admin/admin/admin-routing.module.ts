@@ -4,12 +4,25 @@ import { AdminObjectsComponent } from '../admin-objects-delete/admin-objects.com
 import { AdminApartmentComponent } from '../admin-apartment-delete/admin-apartment.component';
 import { ObjectsEditCreateComponent } from './objects-edit-create/objects-edit-create.component';
 import { ApartmentEditCreateComponent } from '../apartment-edit-create/apartment-edit-create.component';
+import { guardGuard } from '../../guards/guard.guard';
 
 const routes: Routes = [
-  { path: 'admin-object', component: AdminObjectsComponent },
-  { path: 'admin-object/create', component: ObjectsEditCreateComponent },
-  { path: 'admin-object/create/:id', component: ObjectsEditCreateComponent },
-  { path: ':objectId/admin-apartment', component: AdminApartmentComponent },
+  {
+    path: 'admin-object',
+    component: AdminObjectsComponent,
+  },
+  {
+    path: 'admin-object/create',
+    component: ObjectsEditCreateComponent,
+  },
+  {
+    path: 'admin-object/create/:id',
+    component: ObjectsEditCreateComponent,
+  },
+  {
+    path: ':objectId/admin-apartment',
+    component: AdminApartmentComponent,
+  },
   {
     path: ':objectId/admin-apartment/create',
     component: ApartmentEditCreateComponent,

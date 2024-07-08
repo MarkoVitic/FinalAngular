@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Korisnik } from '../../models/korisnik';
 import { RegistrujseServicesService } from '../../services/registrujse-services/registrujse-services.service';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../../shared/header/header.component';
 Korisnik;
 
 @Component({
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private registracijaService: RegistrujseServicesService,
-    private route: Router
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.loginUserForm = this.formBuilder.group({
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
     this.registracijaService.login(this.korisnik).subscribe((data: any) => {
       if (data.token) {
         localStorage.setItem('data-token', data.token);
-        this.route.navigate(['/']);
+        this.router.navigate(['/admin-object']);
+
         console.log(localStorage.getItem('data-token'));
       } else {
         alert('Pogresan User');
