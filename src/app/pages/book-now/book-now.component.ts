@@ -16,6 +16,7 @@ export class BookNowComponent implements OnInit {
     month: string;
     year: number;
     dayOfWeek: string;
+    monthIndex: number;
   }[];
   currentYear: number;
   allObjects: Objekti[];
@@ -52,21 +53,20 @@ export class BookNowComponent implements OnInit {
 
       const day = futureDate.getDate();
       const month = this.getMonthOfYear(futureDate.getMonth());
+      const monthIndex = futureDate.getMonth();
       const year = futureDate.getFullYear();
       const dayOfWeek = this.getDayOfWeek(futureDate.getDay());
 
-      this.datesForBooking.push({ day, month, year, dayOfWeek });
+      this.datesForBooking.push({ day, month, year, dayOfWeek, monthIndex });
     }
   }
   step(step: number) {
-    console.log(step);
     if (step === 15) {
       this.stepForwarBack += step;
       console.log('plus', this.stepForwarBack);
       this.datesForBooking = [];
       this.show15Days();
     } else if (step === -15 && this.stepForwarBack > 0) {
-      console.log(step);
       this.stepForwarBack = this.stepForwarBack - 15;
       console.log('minus', this.stepForwarBack);
       this.datesForBooking = [];
@@ -75,12 +75,23 @@ export class BookNowComponent implements OnInit {
   }
 
   selectDate(index: number, nazivApartmana: string) {
+    let m = new Date(
+      this.datesForBooking[index].year,
+      this.datesForBooking[index].monthIndex,
+      this.datesForBooking[index].day
+    );
+    console.log(m);
+
     if (this.dateSelected.length <= 1) {
       this.dateSelected.push(index);
       if (this.dateSelected[0] <= index) {
         if (this.dateSelected) {
           let apartman = nazivApartmana.split(' ').join('');
           let startDate = document.querySelectorAll(`.class-${apartman}`);
+          // let mrko = document.querySelectorAll(`.datum`);
+          // for (let i = 0; i < mrko.length; i++) {
+          //   console.log(mrko[i]);
+          // }
           let allSlectedDivs = document.querySelectorAll('div');
           allSlectedDivs.forEach((div) => {
             if (
@@ -117,6 +128,7 @@ export class BookNowComponent implements OnInit {
     }
   }
 
+  //* Removes classes (bg-color) of of price when its selected more then 2  *//
   resetBookingStyles() {
     let allSlectedDivs = document.querySelectorAll('div');
     allSlectedDivs.forEach((div) => div.classList.remove('active'));
@@ -130,11 +142,12 @@ export class BookNowComponent implements OnInit {
 
     this.dateSelected = [];
   }
-
+  //*Sets days of the week manulay*//
   getDayOfWeek(dayIndex: number): string {
     const daysOfWeek = ['Ned', 'Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub'];
     return daysOfWeek[dayIndex];
   }
+  //*Sets month of the yea manualy*//
   getMonthOfYear(dayIndex: number): string {
     const daysOfWeek = [
       'Jan',
