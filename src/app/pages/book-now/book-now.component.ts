@@ -22,7 +22,15 @@ export class BookNowComponent implements OnInit {
   allObjects: Objekti[];
   allApartments: Apartman[];
   stepForwarBack: number = 0;
-  dateSelected: number[] = [];
+  dateSelected: {
+    day: number;
+    month: string;
+    year: number;
+    dayOfWeek: string;
+    monthIndex: number;
+  }[] = [];
+
+  temporarylStem: number;
 
   constructor(
     private objectServices: ObjektiServicesService,
@@ -34,7 +42,7 @@ export class BookNowComponent implements OnInit {
 
   ngOnInit(): void {
     this.show15Days();
-    console.log(this.datesForBooking);
+
     this.currentYear =
       this.datesForBooking[this.datesForBooking.length - 1].year;
 
@@ -63,67 +71,57 @@ export class BookNowComponent implements OnInit {
   step(step: number) {
     if (step === 15) {
       this.stepForwarBack += step;
-      console.log('plus', this.stepForwarBack);
+
       this.datesForBooking = [];
       this.show15Days();
     } else if (step === -15 && this.stepForwarBack > 0) {
       this.stepForwarBack = this.stepForwarBack - 15;
-      console.log('minus', this.stepForwarBack);
+
       this.datesForBooking = [];
       this.show15Days();
     }
   }
 
   selectDate(index: number, nazivApartmana: string) {
-    let m = new Date(
-      this.datesForBooking[index].year,
-      this.datesForBooking[index].monthIndex,
-      this.datesForBooking[index].day
-    );
-    console.log(m);
-
     if (this.dateSelected.length <= 1) {
-      this.dateSelected.push(index);
-      if (this.dateSelected[0] <= index) {
-        if (this.dateSelected) {
-          let apartman = nazivApartmana.split(' ').join('');
-          let startDate = document.querySelectorAll(`.class-${apartman}`);
-          // let mrko = document.querySelectorAll(`.datum`);
-          // for (let i = 0; i < mrko.length; i++) {
-          //   console.log(mrko[i]);
-          // }
-          let allSlectedDivs = document.querySelectorAll('div');
-          allSlectedDivs.forEach((div) => {
-            if (
-              !div.classList.contains(`class-${apartman}`) &&
-              div.classList.contains('cijena')
-            ) {
-              div.style.pointerEvents = 'none';
+      this.dateSelected.push(this.datesForBooking[index]);
+      if (this.dateSelected.length == 1) {
+        this.temporarylStem = this.stepForwarBack;
+      }
 
-              div.style.backgroundColor = 'lightblue'; // Optional: to visually indicate the div is unclickable
-            }
-          });
+      let apartman = nazivApartmana.split(' ').join('');
+      let startDate = document.querySelectorAll(`.class-${apartman}`);
 
-          for (
-            let i = 0;
-            i <= this.dateSelected[this.dateSelected.length - 1];
-            i++
-          ) {
-            if (
-              i >= this.dateSelected[this.dateSelected.length - 1] ||
-              (i <= this.dateSelected[this.dateSelected.length - 1] &&
-                i >= this.dateSelected[0])
-            ) {
-              startDate[i].classList.add('active');
-            }
-          }
+      let allSlectedDivs = document.querySelectorAll('div');
+      allSlectedDivs.forEach((div) => {
+        if (
+          !div.classList.contains(`class-${apartman}`) &&
+          div.classList.contains('cijena')
+        ) {
+          div.style.pointerEvents = 'none';
+
+          div.style.backgroundColor = 'lightblue'; // Optional: to visually indicate the div is unclickable
         }
-      } else {
-        alert('E Brko! Sto pokusavas to!?');
-        this.resetBookingStyles();
+      });
+
+      for (let i = 0; i < startDate.length; i++) {
+        const day = this.datesForBooking[i]?.day;
+        if (this.dateSelected.length === 1 && i === index) {
+          console.log(this.dateSelected[this.dateSelected.length - 1].day);
+          startDate[i].classList.add('active');
+        }
+        if (
+          this.dateSelected.length === 2 &&
+          ((day >= this.dateSelected[0].day &&
+            day <= this.dateSelected[1].day) ||
+            (day >= this.dateSelected[1].day &&
+              day <= this.dateSelected[0].day))
+        ) {
+          startDate[i].classList.add('active');
+        }
       }
     } else {
-      alert('Opet ti Brko! Sto pokusavas to!?');
+      alert('Da vidim da je problemOpet ti Brko! Sto pokusavas to!?');
       this.resetBookingStyles();
     }
   }

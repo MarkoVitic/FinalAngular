@@ -1,3 +1,20 @@
 .active {
   background-color: red;
 }
+
+.reservation-box {
+  max-width: 500px;
+}
+.apartments-for-rent {
+  background-color: coral;
+}
+
+.apartments-for-rent-dates {
+  width: 350px;
+}
+
+.dates {
+  width: 120px;
+  height: 90px;
+  background-color: red;
+}

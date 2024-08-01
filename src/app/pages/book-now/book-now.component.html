@@ -1,38 +1,104 @@
-<div class="container d-flex flex-column">
-  <div
-    class="container d-flex flex-row justify-content-between align-items-end"
-  >
-    <button [disabled]="stepForwarBack <= 0" (click)="step(-15)">
-      Predhodno</button
-    ><button (click)="step(15)">Sledece</button>
-  </div>
-  <div
-    class="container d-flex flex-row justify-content-between align-items-end"
-    *ngFor="let apartman of allApartments; let i = index"
-  >
-    <div class="text-center pb-4" style="width: 200px">
-      {{ apartman.naziv_apartmana }}
+<div class="container d-flex flex-row">
+  <div class="container d-flex flex-column d-none">
+    <div
+      class="container d-flex flex-row justify-content-between align-items-end"
+    >
+      <button [disabled]="stepForwarBack <= 0" (click)="step(-15)">
+        Predhodno</button
+      ><button (click)="step(15)">Sledece</button>
     </div>
     <div
-      class="d-flex flex-column justify-content-between align-items-center mr-2"
-      *ngFor="let date of datesForBooking; index as i"
+      class="container d-flex flex-row justify-content-between align-items-end"
+      *ngFor="let apartman of allApartments; let i = index"
     >
-      <div>
+      <div class="text-center pb-4" style="width: 200px">
+        {{ apartman.naziv_apartmana }}
+      </div>
+      <div
+        class="d-flex flex-column justify-content-between align-items-center mr-2"
+        *ngFor="let date of datesForBooking; index as i"
+      >
         <div>
-          {{ date.month }} <strong class="datum">{{ date.day }}</strong> <br />
-          {{ date.dayOfWeek }}
-        </div>
+          <div>
+            {{ date.month }} <strong class="datum">{{ date.day }}</strong>
+            <br />
+            {{ date.dayOfWeek }}
+          </div>
 
-        <div
-          class="cijena pt-4 px-2 class-{{
-            apartman.naziv_apartmana.split(' ').join('')
-          }}"
-          style="height: 60px; width: 60px"
-          (click)="selectDate(i, apartman.naziv_apartmana)"
-        >
-          {{ apartman.cijena_po_danu }}
+          <div
+            class="cijena pt-4 px-2 class-{{
+              apartman.naziv_apartmana.split(' ').join('')
+            }}"
+            style="height: 60px; width: 60px"
+            (click)="selectDate(i, apartman.naziv_apartmana)"
+          >
+            {{ apartman.cijena_po_danu }}
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="container d-flex flex-row gap-5">
+    <div>
+      <h2>
+        Selectujete Trazena polja kako bi provjerili da li ima nesto slobodno
+      </h2>
+      <div class="apartments-for-rent">a</div>
+    </div>
+
+    <div
+      class="d-flex flex-column mx-auto apartments-for-rent-dates p-4 bg-light"
+    >
+      <h4>Rezervisi smjestaj</h4>
+
+      <div class="d-flex flex-row gap-5">
+        <div>
+          <p
+            class="border-bottom border-3 border-dark d-flex align-items-center justify-content-center"
+          >
+            Datum Doalska
+          </p>
+          <div class="d-flex dates align-items-center justify-content-center">
+            avgist 25
+          </div>
+        </div>
+        <div class="">
+          <p
+            class="border-bottom border-3 border-dark d-flex align-items-center justify-content-center"
+          >
+            Datum odlaska
+          </p>
+          <div class="d-flex dates align-items-center justify-content-center">
+            Sep 30
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex align-items-center justify-content-center mt-2 border border-1 border-dark"
+      >
+        <label for="number-persons">* Broj osoba:</label>
+        <select name="number-persons" id="broj-osoba">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div
+        class="d-flex align-items-center justify-content-center mt-2 border border-1 border-dark"
+      >
+        Broj Nocenja:
+      </div>
+      <span class="border-bottom border-3 border-primary mt-4"></span>
+      <div
+        class="d-flex flex-row align-items-center justify-content-between mt-3 border border-1 border-dark p-2"
+      >
+        <p>Ukupna Cijena</p>
+        <p>350</p>
+      </div>
+      <button class="mt-2">Rezervisi</button>
     </div>
   </div>
 </div>
