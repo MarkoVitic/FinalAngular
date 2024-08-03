@@ -175,9 +175,11 @@ export class BookNowComponent implements OnInit {
   showHideSelectDate(): void {
     let selectDate = document.querySelector('#bookSelacteDate');
     let bookSerch = document.querySelector('#bookSearch');
+    let sendReservation = document.querySelector('#sendReservation');
 
     if (selectDate.classList.contains('d-none')) {
       selectDate.classList.remove('d-none');
+      sendReservation.classList.remove('d-none');
       bookSerch.classList.add('d-none');
     }
   }

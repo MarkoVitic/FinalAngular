@@ -1,4 +1,4 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column d-none" id="sendReservation">
   <div
     class="d-flex flex-row justify-content-between align-items-center bg-info bg-gradient mb-4"
   >
@@ -83,7 +83,7 @@
 
 <div class="d-flex flex-row mb-5">
   <!--Tabela Sa Datumima -->
-  <div class="d-flex flex-column" id="bookSelacteDate">
+  <div class="d-flex flex-column d-none" id="bookSelacteDate">
     <div class="d-flex flex-row justify-content-between align-items-end mb-4">
       <button [disabled]="stepForwarBack <= 0" (click)="step(-12)">
         Predhodno</button
@@ -126,7 +126,7 @@
 
   <!-- Pretraga Slobodnih Terimina Za Apartmane-->
 
-  <div class="container d-flex flex-row gap-5 d-none" id="bookSearch">
+  <div class="container d-flex flex-row gap-5" id="bookSearch">
     <div>
       <h2>
         Selectujete Trazena polja kako bi provjerili da li ima nesto slobodno
