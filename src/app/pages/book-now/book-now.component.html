@@ -1,45 +1,132 @@
-<div class="container d-flex flex-row">
-  <div class="container d-flex flex-column d-none">
-    <div
-      class="container d-flex flex-row justify-content-between align-items-end"
+<div class="d-flex flex-column">
+  <div
+    class="d-flex flex-row justify-content-between align-items-center bg-info bg-gradient mb-4"
+  >
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <p>Datum Dolaska</p>
+      <p>
+        <strong class="fs-2 p-2">
+          {{ dateSelected[0]?.day | number : "2.0" }}
+          {{ dateSelected[0]?.month }} {{ dateSelected[0]?.year }}</strong
+        >
+      </p>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <p>Datum polaska</p>
+      <p>
+        <strong class="fs-2 p-2">
+          {{ dateSelected[1]?.day | number : "2.0" }}
+          {{ dateSelected[1]?.month }}
+          {{ dateSelected[1]?.year }}
+        </strong>
+      </p>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <p>Ukupan Broj Nocenja</p>
+      <strong class="fs-2 p-2"
+        ><p>{{ numberOfNights }} Noćenja</p></strong
+      >
+    </div>
+
+    <div class="d-flex flex-row justify-content-between align-items-center">
+      <p class="d-flex align-items-center">
+        <!-- Small square representing Slobodni Dani -->
+        <span
+          style="
+            width: 45px;
+            height: 45px;
+            background-color: #fff;
+            border: 1px solid #000;
+            margin-right: 10px;
+            z-index: 1000;
+          "
+        ></span>
+        Slobodni Dani
+      </p>
+      <p
+        class="d-flex align-items-center justify-content-between mr-3"
+        style="padding-left: 10px"
+      >
+        <!-- Small square representing Zauzeti Dani -->
+        <span
+          style="
+            width: 45px;
+            height: 45px;
+            background-color: #dc3545;
+            border: 1px solid #000;
+            margin-right: 10px;
+          "
+        ></span>
+        Zauzeti Dani
+      </p>
+    </div>
+  </div>
+  <div
+    class="w-100 d-flex justify-content-center align-items-center"
+    style="width: 250px"
+  >
+    <button
+      [disabled]="!numberOfNights"
+      style="
+        padding: 15px 30px;
+        font-size: 1.5rem;
+        width: 100%;
+        max-width: 300px;
+      "
+      class="btn btn-primary"
     >
-      <button [disabled]="stepForwarBack <= 0" (click)="step(-15)">
+      Rezerviši
+    </button>
+  </div>
+</div>
+
+<div class="d-flex flex-row mb-5">
+  <!--Tabela Sa Datumima -->
+  <div class="d-flex flex-column" id="bookSelacteDate">
+    <div class="d-flex flex-row justify-content-between align-items-end mb-4">
+      <button [disabled]="stepForwarBack <= 0" (click)="step(-12)">
         Predhodno</button
-      ><button (click)="step(15)">Sledece</button>
+      ><button (click)="step(12)">Sledece</button>
     </div>
     <div
-      class="container d-flex flex-row justify-content-between align-items-end"
+      class="d-flex flex-row justify-content-between align-items-center gap-2"
       *ngFor="let apartman of allApartments; let i = index"
     >
-      <div class="text-center pb-4" style="width: 200px">
+      <div
+        class="w-100 text-center pb-4 bg-light p-2"
+        style="width: 200px !important"
+      >
         {{ apartman.naziv_apartmana }}
       </div>
       <div
-        class="d-flex flex-column justify-content-between align-items-center mr-2"
+        class="d-flex flex-column justify-content-between align-items-center mr-2 gap-1 mb-3"
         *ngFor="let date of datesForBooking; index as i"
       >
         <div>
-          <div>
+          <div class="fs-8 text-center">
             {{ date.month }} <strong class="datum">{{ date.day }}</strong>
             <br />
             {{ date.dayOfWeek }}
           </div>
 
           <div
-            class="cijena pt-4 px-2 class-{{
+            class="d-flex justify-content-center align-items-center border border-primaty px-1   cijena  class-{{
               apartman.naziv_apartmana.split(' ').join('')
-            }}"
-            style="height: 60px; width: 60px"
+            }} mt-1  "
+            style="height: 60px; width: 80px; font-size: 14px"
             (click)="selectDate(i, apartman.naziv_apartmana)"
           >
-            {{ apartman.cijena_po_danu }}
+            {{ apartman.cijena_po_danu }} EUR
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container d-flex flex-row gap-5">
+  <!-- Pretraga Slobodnih Terimina Za Apartmane-->
+
+  <div class="container d-flex flex-row gap-5 d-none" id="bookSearch">
     <div>
       <h2>
         Selectujete Trazena polja kako bi provjerili da li ima nesto slobodno
@@ -53,24 +140,36 @@
       <h4>Rezervisi smjestaj</h4>
 
       <div class="d-flex flex-row gap-5">
-        <div>
+        <div (click)="showHideSelectDate()">
           <p
             class="border-bottom border-3 border-dark d-flex align-items-center justify-content-center"
           >
             Datum Doalska
           </p>
-          <div class="d-flex dates align-items-center justify-content-center">
-            avgist 25
+          <div
+            class="d-flex flex-column dates align-items-center justify-content-center"
+          >
+            <span class="border-bottom border-dark">{{
+              dateSelected[0]?.dayOfWeek
+            }}</span>
+            <strong class="fs-4"> {{ dateSelected[0]?.day }} </strong>
+            {{ dateSelected[0]?.month }}
           </div>
         </div>
-        <div class="">
+        <div (click)="showHideSelectDate()">
           <p
             class="border-bottom border-3 border-dark d-flex align-items-center justify-content-center"
           >
             Datum odlaska
           </p>
-          <div class="d-flex dates align-items-center justify-content-center">
-            Sep 30
+          <div
+            class="d-flex flex-column dates mx-auto align-items-center justify-content-center"
+          >
+            <span class="border-bottom border-dark">
+              {{ dateSelected[1]?.dayOfWeek }}
+            </span>
+            <strong class="fs-4">{{ dateSelected[1]?.day }} </strong>
+            {{ dateSelected[1]?.month }}
           </div>
         </div>
       </div>
@@ -80,10 +179,11 @@
         <label for="number-persons">* Broj osoba:</label>
         <select name="number-persons" id="broj-osoba">
           <option value="1">1</option>
-          <option value="2">2</option>
+          <option value="2" selected>2</option>
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5">5</option>
+          <option value="6">6</option>
         </select>
       </div>
       <div
@@ -98,7 +198,7 @@
         <p>Ukupna Cijena</p>
         <p>350</p>
       </div>
-      <button class="mt-2">Rezervisi</button>
+      <button class="mt-2">Pronadji Apartman</button>
     </div>
   </div>
 </div>

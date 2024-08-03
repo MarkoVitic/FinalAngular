@@ -31,6 +31,7 @@ export class BookNowComponent implements OnInit {
   }[] = [];
 
   temporarylStem: number;
+  numberOfNights: number;
 
   constructor(
     private objectServices: ObjektiServicesService,
@@ -55,7 +56,7 @@ export class BookNowComponent implements OnInit {
   }
 
   show15Days() {
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 12; i++) {
       const futureDate = new Date();
       futureDate.setDate(this.dateNow.getDate() + (this.stepForwarBack + i));
 
@@ -69,13 +70,13 @@ export class BookNowComponent implements OnInit {
     }
   }
   step(step: number) {
-    if (step === 15) {
+    if (step === 12) {
       this.stepForwarBack += step;
 
       this.datesForBooking = [];
       this.show15Days();
-    } else if (step === -15 && this.stepForwarBack > 0) {
-      this.stepForwarBack = this.stepForwarBack - 15;
+    } else if (step === -12 && this.stepForwarBack > 0) {
+      this.stepForwarBack = this.stepForwarBack - 12;
 
       this.datesForBooking = [];
       this.show15Days();
@@ -119,6 +120,10 @@ export class BookNowComponent implements OnInit {
         ) {
           startDate[i].classList.add('active');
         }
+        if (this.dateSelected.length === 2) {
+          this.numberOfNights =
+            this.dateSelected[1].day - this.dateSelected[0].day + 1;
+        }
       }
     } else {
       alert('Da vidim da je problemOpet ti Brko! Sto pokusavas to!?');
@@ -135,6 +140,7 @@ export class BookNowComponent implements OnInit {
         div.style.pointerEvents = 'auto';
 
         div.style.backgroundColor = ''; // Optional: to visually indicate the div is unclickable
+        this.numberOfNights = 0;
       }
     });
 
@@ -162,5 +168,17 @@ export class BookNowComponent implements OnInit {
       'Dec',
     ];
     return daysOfWeek[dayIndex];
+  }
+
+  /** Show Select Date */
+
+  showHideSelectDate(): void {
+    let selectDate = document.querySelector('#bookSelacteDate');
+    let bookSerch = document.querySelector('#bookSearch');
+
+    if (selectDate.classList.contains('d-none')) {
+      selectDate.classList.remove('d-none');
+      bookSerch.classList.add('d-none');
+    }
   }
 }
